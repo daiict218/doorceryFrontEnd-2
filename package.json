@@ -36,6 +36,7 @@
     "node-sass": "^4.5.2",
     "postcss-load-config": "1.0.0",
     "postcss-loader": "1.0.0",
+    "postcss-scss": "^1.0.1",
     "react": "^15.5.0",
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.5.0",

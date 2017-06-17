@@ -3,7 +3,6 @@ import React from 'react';
 import withStyles from '../../decorators/withStyles';
 import styles from './HomePage.scss';
 
-@withStyles(styles)
 class HomePage extends React.Component {
   render() {
     return (
@@ -14,4 +13,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default HomePage;
+export default withStyles(HomePage, styles);

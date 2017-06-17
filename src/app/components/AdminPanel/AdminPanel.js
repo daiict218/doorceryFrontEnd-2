@@ -2,6 +2,9 @@ import React from 'react';
 
 import { withRouter } from 'react-router';
 
+import withStyles from '../../decorators/withStyles';
+import styles from './adminPanel.scss';
+
 class AdminPanel extends React.Component {
   onButtonClick = (event) => {
     const dataSet = event.currentTarget.dataset;
@@ -11,7 +14,7 @@ class AdminPanel extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.buttonContainer}>
         <button onClick={this.onButtonClick} data-id={'categories'}>{'Categories'}</button>
         <button onClick={this.onButtonClick} data-id={'subcategories'}>{'Sub Categories'}</button>
         <button onClick={this.onButtonClick} data-id={'items'}>{'Items'}</button>
@@ -20,4 +23,4 @@ class AdminPanel extends React.Component {
   }
 }
 
-export default withRouter(AdminPanel);
+export default withStyles(withRouter(AdminPanel), styles);

@@ -14,10 +14,18 @@ class Entities extends React.Component {
     this.props.fetchEntities(ENTITY_TYPES[this.props.location.pathname.split('/').pop()])
   }
 
+  renderHeader() {
+    return (
+      <div>
+        <button>{`Add ${ENTITY_TYPES[this.props.location.pathname.split('/').pop()]}`}</button>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div>
-        {'Hello from AddCategories'}
+        {this.renderHeader()}
       </div>
     )
   }

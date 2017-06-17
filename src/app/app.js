@@ -8,7 +8,6 @@ import {
 } from 'lodash';
 
 import styles from './app.scss';
-//import withStyles from './decorators/withStyles';
 import HomePage from './components/HomePage';
 import commonStyles from './common/common.scss';
 

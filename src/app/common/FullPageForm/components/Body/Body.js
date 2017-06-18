@@ -11,7 +11,7 @@ import s from '../FormContainer/FormContainer.scss';
 
 export default pure(({ className, children, ...restProps }) => {
   return (
-    <div {...restProps} className={classnames(s.formBody, className, 'dpr')}>
+    <div {...restProps} className={classnames(s.formBody, className)}>
       {children}
     </div>
   );

@@ -1,1 +1,3 @@
-export default from './FormContainer';
+import FullPageForm from './components/FormContainer';
+
+export default FullPageForm;

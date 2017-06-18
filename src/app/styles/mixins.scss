@@ -1,0 +1,9 @@
+@mixin size($height, $width) {
+  height: $height;
+  width: $width;
+}
+
+@mixin size($size) {
+  height: $size;
+  widows: $size;
+}

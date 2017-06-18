@@ -12,9 +12,10 @@ import {
   noop as _noop,
   isFunction as _isFunction,
 } from 'lodash';
+import FontAwesome from 'react-fontawesome';
 
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import styles from './formContainer.scss';
+import styles from './FormContainer.scss';
+import withStyles from '../../../../decorators/withStyles';
 
 import Header from '../Header';
 import Body from '../Body';
@@ -52,22 +53,21 @@ class FormContainer extends React.Component {
   };
 
   renderCloseIcon() {
+    const props = this.props;
     return (
-      <div>
-        {'Hello world'}
+      <div className={classnames(styles.closeContainer, props.closeIcnClassName, 'circular scp spf stc p-x-4')}
+        onClick={this.handleCloseForm}
+      >
+        <div className={classnames(styles.closeIconCont, 'm-b-1')}>
+          <FontAwesome
+            name={'close'}
+            size={'2x'}
+            className={styles.closeIcon}
+          />
+        </div>
+        <div className={`${styles.closeLabel} txt-bd2`}>{props.closeIcnLabel}</div>
       </div>
     );
-    //  const props = this.props;
-    //  return (
-    //    <div className={classnames(s.closeContainer, props.closeIcnClassName, 'circular scp spf stc p-x-4')}
-    //      onClick={this.handleCloseForm}
-    //    >
-    //      <div className={classnames(s.closeIconCont, "m-b-1")}>
-    //        <Icon name="close" className={s.closeIcon}/>
-    //      </div>
-    //      <div className={`${s.closeLabel} txt-bd2`}>{props.closeIcnLabel}</div>
-    //    </div>
-    //  );
   }
 
   render() {
@@ -76,14 +76,13 @@ class FormContainer extends React.Component {
 
     return (
       <Portal container={_isFunction(container) ? container() : container}>
-        <div
-          className={classnames(`${s.formContainer} ${props.className} full-width full-height spf`, {
-          [s.bgDark]: props.bgDark,
-          [s.withoutHeader]: !props.renderHeader,
-          [s.withoutFooter]: !props.renderFooter,
-          [s.withoutHeaderAndCloseButton]: !props.showCloseIcon && !props.renderHeader,
-          [s.withoutHeaderAndFooter]:!props.renderHeader && !props.renderFooter,
-        })}
+        <div className={classnames(`${styles.formContainer} ${props.className} full-width full-height spf`, {
+            [styles.bgDark]: props.bgDark,
+            [styles.withoutHeader]: !props.renderHeader,
+            [styles.withoutFooter]: !props.renderFooter,
+            [styles.withoutHeaderAndCloseButton]: !props.showCloseIcon && !props.renderHeader,
+            [styles.withoutHeaderAndFooter]:!props.renderHeader && !props.renderFooter,
+          })}
         >
           {props.showCloseIcon && this.renderCloseIcon()}
           {props.children}
@@ -93,9 +92,9 @@ class FormContainer extends React.Component {
   }
 }
 
-const FormContainerHOC = FormContainer;
+const FormContainerHOC = withStyles(FormContainer, styles);
 FormContainerHOC.Header = Header;
 FormContainerHOC.Body = Body;
 FormContainerHOC.Footer = Footer;
 
-export default withStyles(styles)(FormContainerHOC);
+export default FormContainerHOC;

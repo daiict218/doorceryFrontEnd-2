@@ -111,13 +111,6 @@ $zindex-mid: 100 !default;
 $zindex-max: 1000 !default;
 $zindex-x-max: 10000 !default;
 
-/*  Illustrations
-    ========================================================================  */
-$spr-loader-path: "http://spr.ly/6002BQ02g";
-$empty-stream-img-path: "http://spr.ly/6002Bt7Pp";
-$planet-namek-img-path: "http://spr.ly/6005Bt7Oc";
-$astronaut-img-path: "http://spr.ly/6007Bt7Ov";
-
 /*  Box Shadows
     ========================================================================  */
 $box-shadow-light-color: transparentize($black, .8) !default;

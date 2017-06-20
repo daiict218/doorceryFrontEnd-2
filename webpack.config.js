@@ -3,12 +3,7 @@ const argv = require('minimist')(process.argv.slice(2));
 
 const DEBUG = !argv.release; //todo: check where it comes from
 
-const POSTCSS_LOADER = 'postcss-loader?parser=postcss-scss',
-  SASS_LOADER = `sass-loader?${JSON.stringify({
-    sourceMap: DEBUG,
-  })}`,
-
-  AUTOPREFIXER_BROWSERS = [
+const AUTOPREFIXER_BROWSERS = [
     'Android 2.3',
     'Android >= 4',
     'Chrome >= 30',
@@ -25,6 +20,28 @@ const POSTCSS_LOADER = 'postcss-loader?parser=postcss-scss',
     __DEV__: DEBUG,
     __SERVER__: false,
     __iconPrefix__: '"icon"',
+  },
+
+  CSS_LOADER_MODULES_OPTIONS = {
+    sourceMap: DEBUG,
+    // CSS Modules https://github.com/css-modules/css-modules
+    modules: true,
+    localIdentName: DEBUG ? '[name]_[local]' : '[hash:base64:4]', // _[hash:base64:3]
+    // CSS Nano http://cssnano.co/options/
+    minimize: !DEBUG,
+  },
+
+  POSTCSS_LOADER_OPTIONS = {
+    parser: 'postcss-scss',
+    plugins: () => ([
+      require('autoprefixer')({
+        browsers: AUTOPREFIXER_BROWSERS,
+      }),
+    ]),
+  },
+
+  SASS_LOADER_OPTIONS = {
+    sourceMap: DEBUG,
   };
 
 module.exports = {
@@ -39,42 +56,42 @@ module.exports = {
     publicPath: '/',
   },
   plugins: [    //todo: remove common plugins (for prod and dev) in another constant
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin(GLOBALS),
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+        query: {
+          presets: ['react', ['es2015', { modules: false }], 'node5', 'stage-0'],
+          plugins: ['transform-runtime', 'transform-react-jsx-source', 'transform-async-to-generator'],
+        },
       },
       {
         test: /\.scss$/,
         loaders: [
           'isomorphic-style-loader',
-          `css-loader?${JSON.stringify({
-            sourceMap: DEBUG,
-            modules: true, // CSS Modules https://github.com/css-modules/css-modules
-            localIdentName: DEBUG ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-            minimize: !DEBUG, // CSS Nano http://cssnano.co/options/
-          })}`,
-          POSTCSS_LOADER,
-          SASS_LOADER,
+          {
+            loader: 'css-loader',
+            options: CSS_LOADER_MODULES_OPTIONS,
+          },
+          {
+            loader: 'postcss-loader',
+            options: POSTCSS_LOADER_OPTIONS,
+          },
+          {
+            loader: 'sass-loader',
+            options: SASS_LOADER_OPTIONS,
+          },
         ],
       },
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader',
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false',
-        ],
       },
       {
         test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
@@ -89,8 +106,5 @@ module.exports = {
         loader: 'file',
       },
     ],
-  },
-  postcss() {
-    return [require('autoprefixer')({ browsers: AUTOPREFIXER_BROWSERS })];
   },
 };

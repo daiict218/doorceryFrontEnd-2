@@ -3,9 +3,9 @@ import HomePage from './app/components/HomePage';
 //import LoginPage from './app/components/LoginPage';
 import AdminPanel from './app/components/AdminPanel';
 import Entities from './app/components/Entities';
+import AddEntities from './app/components/AddEntities';
+import Added from './app/components/Added';
 import Auth from './middlewares/Auth';
-//import CoursePage from './app/components/CoursePage';
-//import CourseSearchPage from './app/components/CourseSearchPage';
 
 const routes = {
   // base component (wrapper for the whole application).
@@ -15,7 +15,7 @@ const routes = {
       path: '/',
       getComponent: (location, callback) => {
         callback(null, HomePage);
-      }
+      },
     },
     {
       path: '/admin',
@@ -25,7 +25,7 @@ const routes = {
         //} else {
         callback(null, AdminPanel);
         //}
-      }
+      },
     },
     { //todo-Ajay : Make a single component for both the three
       path: '/admin/entities/:entitytype',
@@ -35,8 +35,28 @@ const routes = {
         //} else {
         callback(null, Entities);
         //}
-      }
-    }
+      },
+    },
+    { //todo-Ajay : Make a single component for both the three
+      path: '/admin/addentities',
+      getComponent: (location, callback) => {
+        //if (Auth.isUserAuthenticated()) {
+        //  callback(null, DashboardPage);
+        //} else {
+        callback(null, AddEntities);
+        //}
+      },
+    },
+    { //todo-Ajay : Make a single component for both the three
+      path: '/admin/addentities/added',
+      getComponent: (location, callback) => {
+        //if (Auth.isUserAuthenticated()) {
+        //  callback(null, DashboardPage);
+        //} else {
+        callback(null, Added);
+        //}
+      },
+    },
     //{
     //  path: '/course/:course_id',
     //  getComponent: (location, callback) => {

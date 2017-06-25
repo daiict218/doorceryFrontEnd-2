@@ -1,11 +1,9 @@
 import axios from 'axios';
 
 export default {
-  fetchEntities: function (entityType) {
-    return axios.get(`http://localhost:3000/v1/getEntities`, {
-      params: {
-        entityType: entityType
-      }
-    });
-  }
+  fetchEntities: (entityType) => axios.get('http://localhost:3000/v1/getEntities', {
+    params: { entityType },
+  }),
+
+  addEntity: (entity) => axios.post('http://localhost:3000/v1/addEntity', entity),
 };

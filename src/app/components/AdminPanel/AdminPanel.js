@@ -12,12 +12,15 @@ class AdminPanel extends React.Component {
     this.props.router.push(`/admin/entities/${dataSet.id}`);
   };
 
+  onAddButtonClick = () => this.props.router.push(`/admin/addentities`);
+
   render() {
     return (
       <div className={styles.buttonContainer}>
-        <button onClick={this.onButtonClick} data-id={'categories'}>{'Categories'}</button>
-        <button onClick={this.onButtonClick} data-id={'subcategories'}>{'Sub Categories'}</button>
-        <button onClick={this.onButtonClick} data-id={'items'}>{'Items'}</button>
+        <button onClick={this.onButtonClick} data-id={'categories'}>{'See Categories'}</button>
+        <button onClick={this.onButtonClick} data-id={'subcategories'}>{'See Sub Categories'}</button>
+        <button onClick={this.onButtonClick} data-id={'items'}>{'See Items'}</button>
+        <button onClick={this.onAddButtonClick} data-id={'addentities'}>{'Add Entities'}</button>
       </div>
     );
   }

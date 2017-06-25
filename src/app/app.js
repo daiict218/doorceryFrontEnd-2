@@ -28,10 +28,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <FontAwesome
-          name={'close'}
-          size={'2x'}
-        />
         {this.props.children}
       </div>
     );

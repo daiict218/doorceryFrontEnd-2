@@ -20,7 +20,7 @@ const CATEGORY_NAME_FIELD = {
 
 class AddEntities extends React.Component {
   static propTypes = {
-    router: PropTypes.obj,
+    router: PropTypes.object,
   };
 
   constructor(props) {

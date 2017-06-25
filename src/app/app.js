@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';    //todo: remove this
 
-import commonStyles from './common/common.scss';
+import commonStyles from './common/common.unmod.scss';
 
 class App extends React.Component {
   static childContextTypes = {

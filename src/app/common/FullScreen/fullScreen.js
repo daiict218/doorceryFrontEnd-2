@@ -13,19 +13,26 @@ class FullScreen extends React.Component {
     footer: PropTypes.node,
     headerProps: PropTypes.object,
     bodyProps: PropTypes.object,
-    footerProps: PropTypes.object
+    footerProps: PropTypes.object,
   };
 
   static defaultProps = {
-    onClose: _noop
+    onClose: _noop,
   };
 
   componentWillMount() {
     document.addEventListener('keydown', this.onEscape);
-  };
+  }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.onEscape);
+  }
+
+  onEscape = (event) => {
+    if (event.keyCode === 27) {
+      event.preventDefault();
+      this.props.onClose();
+    }
   };
 
   render() {
@@ -50,14 +57,7 @@ class FullScreen extends React.Component {
         )}
       </FullPageForm>
     );
-  };
-
-  onEscape = (event) => {
-    if (event.keyCode === 27) {
-      event.preventDefault();
-      this.props.onClose();
-    }
-  };
+  }
 }
 
 export default FullScreen;

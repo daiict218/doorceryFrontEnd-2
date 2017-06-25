@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import FullScreen from '../../common/FullScreen';
 
-import { fetchEntities } from '../../../actions/entityActions';
+import entityActions  from '../../../actions/entityActions';
 
 const ENTITY_TYPES = {
   categories: 'Category',
@@ -33,6 +33,10 @@ class Entities extends React.Component {
 
   onAddEntity = () => {
     this.setState({ showAddEntityForm: true });
+  };
+
+  onCancel = () => {
+    this.setState({ showAddEntityForm: false });
   };
 
   renderHeader() {
@@ -73,6 +77,7 @@ class Entities extends React.Component {
             footer={that.renderFooter()}
             bodyProps={{className: 'fullPageBody'}}
             onClose={that.onCancel}
+            show={that.state.showAddEntityForm}
           />
         )}
       </div>
@@ -84,6 +89,8 @@ const mapStateToProps = ({entitiesState}) => ({
   entities: entitiesState.entities,
 });
 
-export default connect(mapStateToProps, {
-  fetchEntities,
-})(Entities);
+const mapDispatchToProps = () => ({
+  fetchEntities: entityActions.fetchEntities,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Entities);

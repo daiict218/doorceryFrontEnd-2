@@ -1,7 +1,10 @@
 const webpack = require('webpack');
 const argv = require('minimist')(process.argv.slice(2));
+const path = require('path');
 
 const DEBUG = !argv.release; //todo: check where it comes from
+
+const ___dirname = process.cwd();
 
 const AUTOPREFIXER_BROWSERS = [
     'Android 2.3',
@@ -42,6 +45,11 @@ const AUTOPREFIXER_BROWSERS = [
 
   SASS_LOADER_OPTIONS = {
     sourceMap: DEBUG,
+  },
+
+  CSS_LOADER_OPTIONS = {
+    sourceMap: DEBUG,
+    minimize: !DEBUG, // CSS Nano http://cssnano.co/options/
   };
 
 module.exports = {
@@ -73,11 +81,30 @@ module.exports = {
       },
       {
         test: /\.scss$/,
+        exclude: [path.resolve(___dirname, 'src/app/common/common.unmod.scss')],
         loaders: [
           'isomorphic-style-loader',
           {
             loader: 'css-loader',
             options: CSS_LOADER_MODULES_OPTIONS,
+          },
+          {
+            loader: 'postcss-loader',
+            options: POSTCSS_LOADER_OPTIONS,
+          },
+          {
+            loader: 'sass-loader',
+            options: SASS_LOADER_OPTIONS,
+          },
+        ],
+      },
+      {
+        test: /\.unmod.scss$/,
+        loaders: [
+          'isomorphic-style-loader',
+          {
+            loader: 'css-loader',
+            options: CSS_LOADER_OPTIONS,
           },
           {
             loader: 'postcss-loader',

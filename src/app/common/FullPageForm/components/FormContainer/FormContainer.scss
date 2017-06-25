@@ -28,7 +28,7 @@ $close-button-dimension: 8*$spacer;
 }
 
 .formBody {
-  height: calc(100% - #{$universal-bar-height + $full-page-form-footer-height + $close-container-height});
+  height: calc(100% - #{$full-page-form-footer-height});
   top: $close-container-height;
 }
 
@@ -76,14 +76,13 @@ $close-button-dimension: 8*$spacer;
 .closeContainer {
   color: $concrete;
   fill: $concrete;
-  padding-top: 2.5*$spacer; //in order to look visually balanced
+  height: $close-button-dimension;
   right: 2.5*$spacer;
   top: $universal-bar-height - $close-container-padding;
-  z-index: $zindex-min; //in order to bring it on the body
-  @include size($close-button-dimension);
+  width: $close-button-dimension;
+  z-index: $zindex-min;
 
   &:hover {
-    background-color: $snow;
     color: $nickel;
     fill: $nickel;
   }

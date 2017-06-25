@@ -34,6 +34,7 @@ class FormContainer extends React.Component {
     showCloseIcon: PropTypes.bool, //Whether to render close icon
     closeIcnClassName: PropTypes.string, //Close Icon Class Name
     closeOnEscape: PropTypes.bool, //Whether to close form on escape or not
+    show: PropTypes.bool, //whether to show the form or not
   };
 
   static defaultProps = {
@@ -46,16 +47,17 @@ class FormContainer extends React.Component {
     closeIcnClassName: '',
     container: bodyContainer,
     closeOnEscape: true,
+    show: true,
   };
 
-  state = {
-    show: true,
+  handleCloseForm = () => {
+    this.props.onHide();
   };
 
   renderCloseIcon() {
     const props = this.props;
     return (
-      <div className={classnames(styles.closeContainer, props.closeIcnClassName, 'circular scp spf stc p-x-4')}
+      <div className={classnames(styles.closeContainer, props.closeIcnClassName, 'circular dcp dpf dtc p-x-4')}
         onClick={this.handleCloseForm}
       >
         <div className={classnames(styles.closeIconCont, 'm-b-1')}>
@@ -74,21 +76,21 @@ class FormContainer extends React.Component {
     const props = this.props,
       {container} = props;
 
-    return (
-      <Portal container={_isFunction(container) ? container() : container}>
-        <div className={classnames(`${styles.formContainer} ${props.className} full-width full-height spf`, {
+    return props.show && (
+        <Portal container={_isFunction(container) ? container() : container}>
+          <div className={classnames(`${styles.formContainer} ${props.className} full-width full-height dpf`, {
             [styles.bgDark]: props.bgDark,
             [styles.withoutHeader]: !props.renderHeader,
             [styles.withoutFooter]: !props.renderFooter,
             [styles.withoutHeaderAndCloseButton]: !props.showCloseIcon && !props.renderHeader,
             [styles.withoutHeaderAndFooter]:!props.renderHeader && !props.renderFooter,
           })}
-        >
-          {props.showCloseIcon && this.renderCloseIcon()}
-          {props.children}
-        </div>
-      </Portal>
-    );
+          >
+            {props.showCloseIcon && this.renderCloseIcon()}
+            {props.children}
+          </div>
+        </Portal>
+      );
   }
 }
 

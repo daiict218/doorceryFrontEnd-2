@@ -7,16 +7,27 @@ import {
 } from 'lodash';
 
 import FIELD_TYPES from '../../constants/fieldTypes';
+import LOOKUP_TYPES from '../../constants/lookupTypes';
 import entityTypes from '../../constants/entityTypes';
 import formField  from '../../common/formField';
 
 import entityUtils from '../../../utils/entityUtils';
 
 const CATEGORY_NAME_FIELD = {
-  id: 'categoryName',
-  placeholder: 'Add Category Name',
-  type: FIELD_TYPES.TEXT.type,
-};
+    id: 'categoryName',
+    placeholder: 'Add Category Name',
+    type: FIELD_TYPES.TEXT.type,
+  },
+  SUB_CATEGORY_NAME_FIELD = {
+    id: 'subCategoryName',
+    placeholder: 'Add SubCategory Name',
+    type: FIELD_TYPES.TEXT.type,
+  },
+  SUB_CATEGORY_CATEGORY_OPTIONS_FIELD = {
+    id: 'subCategoryOptions',
+    type: FIELD_TYPES.LOOKUP_FIELD.type,
+    lookupType: LOOKUP_TYPES.CATEGORY.type,
+  };
 
 class AddEntities extends React.Component {
   static propTypes = {
@@ -29,6 +40,7 @@ class AddEntities extends React.Component {
     this.state = {
       fieldValueMap: {
         categoryName: '',
+        subCategoryName: '',
       },
       fieldValidationMap: {},
     };
@@ -42,7 +54,6 @@ class AddEntities extends React.Component {
         entityType: entityTypes.Category.name,
         entity: { category_name: fieldValueMap.categoryName },
       }).then((res) => {
-        console.log(res);
         this.props.router.push('/admin/addentities/added');
       });
     }
@@ -80,8 +91,14 @@ class AddEntities extends React.Component {
   renderSubCategoryAdder() {
     return (
       <div>
-        <div>{'Sub Category'}</div>
-        <div>{'Add Sub Categoruy'}</div>
+        <div>{'Sub Category Name'}</div>
+        {formField.getFormField(SUB_CATEGORY_NAME_FIELD, {
+          onChange: this.onChange,
+        })}
+        {formField.getFormField(SUB_CATEGORY_CATEGORY_OPTIONS_FIELD, {
+          onChange: this.onChange,
+        })}
+        <div>{'Add Sub Category'}</div>
       </div>
     );
   }

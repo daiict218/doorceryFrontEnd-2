@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';    //todo: remove this
+import 'react-select-plus/dist/react-select-plus.css';    //todo: remove this, react-select-plus styles
 
 import commonStyles from './common/common.unmod.scss';
 

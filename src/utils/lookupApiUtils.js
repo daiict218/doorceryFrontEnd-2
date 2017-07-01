@@ -10,10 +10,8 @@ const lookupUtils = {
   },
 
   lookupByDimension: (lookupRequest) => {
-    console.log(lookupRequest);
-
-    return axios.post('http://localhost:3000/v1/bulkLookUp', lookupRequest);
-  }
+    return axios.post('http://localhost:3002/v1/bulkLookUp', lookupRequest);
+  },
 };
 
 

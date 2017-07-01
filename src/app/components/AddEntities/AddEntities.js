@@ -52,8 +52,8 @@ class AddEntities extends React.Component {
     if (fieldValueMap.categoryName) {
       entityUtils.addEntity({
         entityType: entityTypes.Category.name,
-        entity: { category_name: fieldValueMap.categoryName },
-      }).then((res) => {
+        entity: { name: fieldValueMap.categoryName },
+      }).then(() => {
         this.props.router.push('/admin/addentities/added');
       });
     }

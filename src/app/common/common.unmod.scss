@@ -1,3 +1,15 @@
+@import "../styles/variables";
+
+body {
+  border: 0;
+  color: $black;
+  font: 62.5%/1.5 "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif;
+  font-size: $font-size-normal;
+  margin: 0 auto;
+  padding: 0;
+  width: 980px;
+}
+
 .dpr {
   position: relative !important;
 }
@@ -24,6 +36,18 @@
 
 .dcp {
   cursor: pointer !important;
+}
+
+.clear {
+  clear: both;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
 }
 
 //todo: write this class

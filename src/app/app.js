@@ -1,9 +1,19 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import FontAwesome from 'react-fontawesome';    //todo: remove this
-import 'react-select-plus/dist/react-select-plus.css';    //todo: remove this, react-select-plus styles
+import Portal from 'react-overlays/lib/Portal';
+import DocumentTitle from 'react-document-title';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+//import FontAwesome from 'react-fontawesome';    //todo: remove this
 
+import SnackBar from './common/SnackBar';
+
+import appActions from '../actions/appActions';
+
+import 'react-select-plus/dist/react-select-plus.css';
 import commonStyles from './common/common.unmod.scss';
+
+const DOORCERY_TITLE = 'Doorcery';
 
 class App extends React.Component {
   static childContextTypes = {
@@ -22,17 +32,62 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.props.handleResize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+
+    window.addEventListener('resize', this.onScreenResize);
+  }
+
   componentWillUnmount() {
+    window.removeEventListener('resize', this.onScreenResize);
     this.removeCommonStyles();
   }
 
+  onAlertClose = () => {
+    this.props.hideAlert();
+  };
+
+  onScreenResize = () => {
+    this.props.handleResize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
+
   render() {
+    const that = this,
+      alert = this.props.alert || {};
+
     return (
-      <div className={'container'}>
-        {this.props.children}
-      </div>
+      <DocumentTitle title={DOORCERY_TITLE}>
+        <MuiThemeProvider>
+          <div>
+            {alert.message && (
+              <Portal container={that.domBody}>
+                <SnackBar
+                  message={alert.message}
+                  onClose={that.onAlertClose}
+                  type={alert.type}
+                  hideOnClickAway
+                />
+              </Portal>
+            )}
+            {this.props.children}
+          </div>
+        </MuiThemeProvider>
+      </DocumentTitle>
     );
   }
 }
 
-export default App;
+const mapStateToProps = ({appState}) => ({
+  alert: appState.alert,
+  dimensions: appState.dimensions,
+});
+
+export default connect(mapStateToProps, {
+  ...appActions,
+})(App);

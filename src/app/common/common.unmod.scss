@@ -1,13 +1,19 @@
 @import "../styles/variables";
+@import "../styles/mixins";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
+html {
+  font-size: 10px;
+}
 
 body {
   border: 0;
+  background: #E6E6E9;
   color: $black;
   font: 62.5%/1.5 "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif;
   font-size: $font-size-normal;
   margin: 0 auto;
   padding: 0;
-  width: 980px;
 }
 
 .dpr {
@@ -48,6 +54,31 @@ body {
 
 .pull-right {
   float: right;
+}
+
+.primaryButton {
+  @include button();
+
+  background: $admin-button;
+  border: none;
+  color: $white;
+}
+
+.secondaryButton {
+  @include button();
+
+  background: $white;
+  border: 1px solid $soapstone;
+  color: $soapstone;
+}
+
+.disabledButton {
+  @include button();
+
+  background: $space;
+  color: $white;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 //todo: write this class

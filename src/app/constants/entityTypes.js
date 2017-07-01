@@ -1,13 +1,13 @@
 export default  {
-  Category: {
+  category: {
     type: 'category',
     name: 'Category',
   },
-  SubCategory: {
+  subcategory: {
     type: 'subcategory',
     name: 'SubCategory',
   },
-  Items: {
+  items: {
     type: 'items',
     name: 'Items',
   },

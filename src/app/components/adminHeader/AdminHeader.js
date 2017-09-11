@@ -3,9 +3,9 @@ import {
   pure,
 } from 'recompose';
 
-const AdminHeader = pure(() => (
+const AdminHeader = pure(({ title }) => (
   <div className={'admin-header'}>
-    {'Doorcery'}
+    {title}
   </div>
 ));
 

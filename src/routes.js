@@ -2,8 +2,7 @@ import App from './app/app';
 import HomePage from './app/components/HomePage';
 //import LoginPage from './app/components/LoginPage';
 import AdminPanel from './app/components/AdminPanel';
-import Entities from './app/components/Entities';
-import DataTable from './app/common/DataTable';
+import AdminEntities from './app/components/AdminEntities';
 import AddEntities from './app/components/AddEntities';
 import Added from './app/components/Added';
 import Auth from './middlewares/Auth';
@@ -29,12 +28,12 @@ const routes = {
       },
     },
     { //todo-Ajay : Make a single component for all the three
-      path: '/admin/:entitytype',
+      path: '/:entitytype',
       getComponent: (location, callback) => {
         //if (Auth.isUserAuthenticated()) {
         //  callback(null, DashboardPage);
         //} else {
-        callback(null, DataTable);
+        callback(null, AdminEntities);
         //}
       },
     },

@@ -118,8 +118,6 @@ class AdminPanel extends React.Component {
     const that = this,
       { state } = that;
 
-    console.log(state.entityType);
-
     return (
       <section>
         {state.showModal && (

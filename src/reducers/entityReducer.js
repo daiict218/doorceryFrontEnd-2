@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  entities: []
+  entities: [],
 };
 
 export default function (state = INITIAL_STATE, action) {

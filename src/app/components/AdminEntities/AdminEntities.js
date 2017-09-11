@@ -1,18 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
-import FullScreen from '../../common/FullScreen';
+import AdminHeader from '../adminHeader';
+import DataTable from '../../common/DataTable';
 
-import entityActions  from '../../../actions/entityActions';
+import ENTITY_TYPES from '../../constants/entityTypes';
 
-const ENTITY_TYPES = {
-  categories: 'Category',
-  subcategories: 'SubCategory',
-  items: 'Items',
-};
+import entityActions from '../../../actions/entityActions';
 
-class Entities extends React.Component {
+class AdminEntities extends React.Component {
   static propTypes = {
     location: PropTypes.object,
     fetchEntities: PropTypes.func,
@@ -28,7 +25,7 @@ class Entities extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchEntities(ENTITY_TYPES[this.state.entityType]);
+    this.props.fetchEntities(ENTITY_TYPES[this.state.entityType].name);
   }
 
   onAddEntity = () => {
@@ -70,27 +67,23 @@ class Entities extends React.Component {
 
     return (
       <div>
-        {that.renderHeader()}
-        {that.state.showAddEntityForm && (
-          <FullScreen
-            body={that.renderBody()}
-            footer={that.renderFooter()}
-            bodyProps={{className: 'fullPageBody'}}
-            onClose={that.onCancel}
-            show={that.state.showAddEntityForm}
-          />
-        )}
+        <AdminHeader
+          title={'Doorcery'}
+        />
+        <DataTable
+
+        />
       </div>
     );
   }
 }
 
-const mapStateToProps = ({entitiesState}) => ({
+const mapStateToProps = ({ entitiesState }) => ({
   entities: entitiesState.entities,
 });
 
-const mapDispatchToProps = () => ({
-  fetchEntities: entityActions.fetchEntities,
+const mapDispatchToProps = (dispatch) => ({
+  fetchEntities: entityType => dispatch(entityActions.fetchEntities(entityType)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Entities);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminEntities);

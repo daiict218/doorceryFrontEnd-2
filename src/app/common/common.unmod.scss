@@ -91,6 +91,12 @@ body {
   pointer-events: none;
 }
 
+.center-x {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 //todo: write this class
 .icon {
 

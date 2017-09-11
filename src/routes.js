@@ -3,6 +3,7 @@ import HomePage from './app/components/HomePage';
 //import LoginPage from './app/components/LoginPage';
 import AdminPanel from './app/components/AdminPanel';
 import Entities from './app/components/Entities';
+import DataTable from './app/common/DataTable';
 import AddEntities from './app/components/AddEntities';
 import Added from './app/components/Added';
 import Auth from './middlewares/Auth';
@@ -27,17 +28,17 @@ const routes = {
         //}
       },
     },
-    { //todo-Ajay : Make a single component for both the three
-      path: '/admin/entities/:entitytype',
+    { //todo-Ajay : Make a single component for all the three
+      path: '/admin/:entitytype',
       getComponent: (location, callback) => {
         //if (Auth.isUserAuthenticated()) {
         //  callback(null, DashboardPage);
         //} else {
-        callback(null, Entities);
+        callback(null, DataTable);
         //}
       },
     },
-    { //todo-Ajay : Make a single component for both the three
+    { //todo-Ajay : Make a single component for all the three
       path: '/admin/addentities',
       getComponent: (location, callback) => {
         //if (Auth.isUserAuthenticated()) {

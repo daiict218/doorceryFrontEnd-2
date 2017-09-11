@@ -6,8 +6,8 @@ import {
 } from 'lodash';
 import update from 'immutability-helper';
 
+import AdminHeader from '../adminHeader';
 import Modal from '../../common/Modal';
-import SnackBar from '../../common/SnackBar';
 
 import withStyles from '../../decorators/withStyles';
 import styles from './adminPanel.scss';
@@ -17,7 +17,7 @@ import FIELD_TYPES from '../../constants/fieldTypes';
 import ALERT_TYPES from '../../constants/alertTypes';
 import LOOKUP_TYPES from '../../constants/lookupTypes';
 import ENTITY_TYPES from '../../constants/entityTypes';
-import formField  from '../../common/formField';
+import formField from '../../common/formField';
 import entityUtils from '../../../utils/entityUtils';
 
 const SUBMIT_LABEL = 'Add',
@@ -44,7 +44,7 @@ class AdminPanel extends React.Component {
     this.state = {
       showModal: false,
       showSnackBar: false,
-      entityType: '',
+      entityType: ENTITY_TYPES.category.type,
       fieldValueMap: {
         categoryName: '',
         subCategoryName: '',
@@ -75,7 +75,7 @@ class AdminPanel extends React.Component {
   };
 
   onAddEntity = () => {
-    const {state} = this,
+    const { state } = this,
       fieldValueMap = state.fieldValueMap;
 
     switch (state.entityType) {
@@ -116,7 +116,9 @@ class AdminPanel extends React.Component {
 
   render() {
     const that = this,
-      {state} = that;
+      { state } = that;
+
+    console.log(state.entityType);
 
     return (
       <section>
@@ -134,9 +136,7 @@ class AdminPanel extends React.Component {
           </Modal>
         )}
 
-        <div className={styles.header}>
-          {'Doorcery'}
-        </div>
+        <AdminHeader />
         <div className={'container mt-4 mb-4'}>
           <div className={'row'}>
             <div className={'col-xs-12 col-md-12 col-sm-12 col-xl-4 col-lg-4 justify-content-center d-flex'}>

@@ -10,7 +10,7 @@ class DataTable extends React.Component {
       <div>
         {'Hello from Datatable'}
       </div>
-    )
+    );
   }
 }
 

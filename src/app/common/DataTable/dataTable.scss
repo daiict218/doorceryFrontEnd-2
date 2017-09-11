@@ -1,0 +1,154 @@
+@import '../../styles/variables';
+
+$active-mode-border-color: $snow;
+$active-mode-bg-color: $snow;
+$tableSelectHeight: 2rem;
+$cell-padding: 0.8rem;
+
+.public_fixedDataTable_main {
+  border-bottom: 0;
+  border-color: #e6e6e6;
+  box-sizing: content-box;
+  overflow: initial;
+  user-select: none;
+}
+
+.public_fixedDataTable_header, .public_fixedDataTable_header .public_fixedDataTableCell_main {
+  background-color: transparent;
+  background-image: none;
+}
+
+.public_fixedDataTableRow_highlighted, .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
+  background-color: transparent;
+}
+
+.public_fixedDataTableCell_main {
+  background-color: transparent;
+  border-width: 0;
+  border-left: 1px solid $chalk;
+  overflow: visible;
+}
+
+.fixedDataTableCellGroupLayout_cellGroup {
+  overflow: visible;
+}
+
+.public_fixedDataTable_header {
+  border-bottom-color: $chalk;
+  background: $white;
+  overflow: visible;
+}
+
+.public_fixedDataTableRow_columnsShadow, .public_fixedDataTable_topShadow {
+  pointer-events: none;
+}
+
+.grouped-table .public_fixedDataTable_topShadow {
+  top: 84px !important;
+}
+
+.public_fixedDataTableRow_selected.public_fixedDataTable_hasBottomBorder {
+  border-bottom: none;
+}
+
+.fixedDataTableRowLayout_rowWrapper .fixedDataTableCellLayout_wrap1 {
+  width: 100%; //todo not neeeded anymore
+}
+
+.fixedDataTableRowLayout_rowWrapper .public_fixedDataTableCell_cellContent {
+  padding: 0;
+}
+
+.public_fixedDataTable_bottomShadow {
+  display: none;
+}
+
+.public_fixedDataTableRow_selected {
+  background-color: $active-mode-bg-color;
+}
+
+.public_fixedDataTableRow_selected {
+  .Select, .Select-control {
+    background-color: inherit;
+  }
+}
+
+.public_fixedDataTableRow_main {
+  border-bottom: 1px solid #e6e6e8;
+}
+
+.public_fixedDataTableRow_fixedColumnsDivider {
+  border: none;
+}
+
+.public_fixedDataTableRow_main .public_fixedDataTableCell_main {
+
+  .Select, .Select.Select--multi {
+    height: $tableSelectHeight;
+    border: none;
+    border-radius: 0;
+  }
+
+  .Select .Select-control, .Select.Select--multi .Select-control {
+    max-height: $tableSelectHeight+1;
+    height: $tableSelectHeight;
+    padding: 0 $cell-padding;
+  }
+
+  .Select-control {
+    line-height: $tableSelectHeight;
+  }
+
+  .Select-placeholder {
+    height: $tableSelectHeight;
+    line-height: $tableSelectHeight;
+  }
+
+  .Select-placeholder, .Select:not(.Select--multi) > .Select-control .Select-value {
+    padding-right: 1.5rem;
+    left: $cell-padding;
+  }
+
+  .Select .Select-value-label {
+    margin-left: 0;
+  }
+
+  .Select-input, .Select-input > input {
+    height: $tableSelectHeight;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .Select-value-label, .Select-arrow-zone, .Select-clear-zone, .Select-value, .Select-loading-zone {
+    line-height: $tableSelectHeight;
+  }
+
+  .Select-loading-zone {
+    right: 1.8rem;
+  }
+
+  .Select-arrow-zone {
+    right: $cell-padding;
+  }
+
+  .Select-clear-zone {
+    right: 1.8rem;
+  }
+}
+
+.public_Scrollbar_main {
+  right: -18px;
+
+  &:hover, &:focus {
+    background-color: transparent;
+  }
+}
+
+.public_fixedDataTable_footer .public_fixedDataTableCell_main {
+  border-color: $chalk;
+}
+
+.fixedDataTableLayout_footer .public_fixedDataTableCell_main {
+  border-top: none;
+}
